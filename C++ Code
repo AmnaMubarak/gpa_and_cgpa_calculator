@@ -1,0 +1,920 @@
+#include<string.h>
+#include<windows.h>
+
+using namespace std;
+
+void gotoxy(int x, int y)
+{
+	COORD c;
+	c.X=x;
+	c.Y=y;
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),c);
+}
+
+class Abs{    //pure abstract class, definition of function below
+	
+	public:
+		
+		virtual details () =0;
+	
+	
+	
+};
+ 
+ class student: public Abs{
+ 	
+ 	private:
+ 		
+ 		string name;
+ 		string fname;
+ 		int rollno;
+ 		string dob;
+ 		string city;
+ 		int age;
+ 		
+ 		public:
+ 			
+ 			char dep[30];
+ 			char batch[30];
+ 			
+ 		
+ 	 details()       //virtual
+		{
+ 		
+			cout<<"\nEnter your department : ";
+ 		cin>>dep;
+ 		
+ 		cout<<"\nEnter your Batch : ";
+ 		cin>>batch;
+ 		
+		}		
+ 	
+    student(){
+    	
+				} 
+				
+ 			~student(){}
+				
+				 void setname(string n)
+					{
+						
+					name = n;
+					}
+					
+     string getname()
+					{
+					return name;
+					}
+					
+				 void setfname(string fn)
+					{
+					fname = fn;
+					}
+					
+     string getfname()
+					{
+					return fname;
+					}
+					void setrollno(int rn)
+					{
+					rollno=rn;
+					}
+					
+     int getrollno()
+					{
+					return rollno;
+					}
+				 void setdob(string d)
+					{
+					dob = d;
+					}
+					
+     string getdob()
+					{
+					return dob;
+					}
+				
+     void setcity(string ad)
+					{
+					city=ad;
+					}
+					
+     string getcity()
+					{
+					return city;
+					}
+					void setage(int ag)
+					{
+					
+					age = ag;
+					}
+					
+					
+     int getage()
+					{
+					return age;
+			  
+					}
+							
+					
+					
+					void fil()
+					
+	{
+					
+	  ofstream file("STUDENT DETAILS");
+	
+	
+	  file<<"\nName : "<<name;
+			file<<"\nFathers Name : "<<fname;
+			file<<"\nRoll no : "<<rollno;
+			file<<"\nDate of Birth : "<<dob;
+		 file<<"\nAge : "<<age;
+	 	file<<"\ncity : "<<city;
+			file<<"\nDepartment : "<<dep;
+			file<<"\nBatch : "<<batch;
+			
+			
+	}
+	
+	};
+	
+	
+float calculations(float marks[]);
+
+class Grade;
+
+void findgrade(float gpa[]);
+
+
+
+class Grade
+{
+	
+public:
+	
+        char grade;
+        char gradeno[4];
+        int i;
+        
+        
+      Grade()
+						{
+      	
+						}
+						
+						~Grade()
+						{
+						
+						}
+						
+						
+						void findgrade(float gpa)
+						  {
+							 
+								  while(1)
+                  {
+                  	
+                  if(gpa<2.0)
+                  { 
+				             
+			            		strcpy(gradeno,"F");
+					
+                   break;
+                   
+                  }
+
+                  else if(gpa<2.25)
+                   {
+                   	
+				             strcpy(gradeno,"D" );
+				    
+                   break;
+                   
+                   }
+                   
+                   else if(gpa<2.5)
+                   {
+		            
+				             strcpy(gradeno,"c" );
+				    
+                   break;
+                   
+                   }
+                   else if(gpa<2.75)
+                   {
+                   	
+				                strcpy(gradeno,"c+" );
+				     
+                   break;
+                   
+                   }
+                   
+                   else if(gpa<3.0)
+                   {
+				               
+		   			            strcpy(gradeno,"B-" );
+		   			
+                   break;
+                   
+			              		}
+																			
+                   else if(gpa<3.25)
+                   {
+				  
+				                strcpy(gradeno,"B" );
+				    
+                  break;
+                  
+                   }
+                   else if(gpa<3.5)
+                   {
+                   	
+				             strcpy(gradeno,"B+" );
+                 
+																	 break;
+               
+			            	   }
+														     
+                   else if(gpa<3.75)
+                   {
+                   	
+				             strcpy(gradeno,"A-" );
+                  break;
+                  
+                   }
+                 
+				              else if(gpa<4.0)
+                   {
+                   	
+				              strcpy(gradeno,"A" );
+                  break;
+      
+						              }
+                  
+                  else if(gpa==4)
+                    {
+                  	
+				              strcpy(gradeno,"A+" );
+                  break;
+                  
+								   										}
+
+
+                   }	
+
+						}  
+           
+											       	
+	
+	friend class GPA;
+	
+};
+
+class GPA :public student
+{
+	
+ 	public:
+ 		
+		Grade g;
+		int n;
+		float credit[10];
+  float totalcredit;
+  string subname[30];
+  
+	 float total;
+	 float marks[10];
+	 float gpa[30];
+  
+  char grade;
+  char gradeno[4];
+  
+  int i;
+  float final;
+  float subg[30];
+          
+          GPA()
+										{
+											 total=0;
+											totalcredit=0;
+							
+									 }
+          
+          ~GPA()
+										  {
+										
+										  }
+					       
+	      virtual void Calculations()  //Polymorphism
+								  
+										 {
+										 	
+								   cout<<"\n\n";
+											cout<<"\n\t\t\t****************\n";
+								   cout<<"\t\t\t| CALCULATIONS |\n";
+								   cout<<"\t\t\t****************\n";
+
+           ofstream data("GPA and SGPA"); 
+           cout<<"\nEnter number of courses : ";
+           cin>>n;
+           data<<"\nNumber of Courses : "<<n;
+        
+								 
+       for(i=0;i<n;i++)
+	         {
+                            
+          cout<<"\nEnter course "<< i+1<<" name : ";
+          cin>>subname[i];
+          data<<"\nCourse "<< i+1<<" name : "<<subname[i];
+       
+       
+          cout<<"\nEnter the marks obtained in "<<subname[i] <<" : ";              
+          cin>>marks[i];
+          data<<"\nMarks obtained in "<<subname[i] <<" are : "<<marks[i];
+          
+          
+          gpa[i]=calculations(marks);
+       
+       
+          cout<<"\nGPA in " <<subname[i] << " : "<<gpa[i]<<endl;
+          data<<"\nGPA in " <<subname[i] << " : "<<gpa[i]<<endl;
+          
+          
+          g.findgrade(gpa[i]);
+          
+          cout<<"\nGrade in "<<subname[i] << " :"<<g.gradeno<<endl;
+          data<<"\nGrade in " <<subname[i] << " : "<<g.gradeno<<endl;
+          
+          
+ }
+ 
+	     data.close();
+	
+	}
+	
+float calculations(float marks[])
+
+{
+	
+while(1)
+{
+
+if(marks[i]>=85 && marks[i]<=100)
+{
+
+            return 4.0;
+            
+}
+
+else if (marks[i]>=80 && marks[i]<85)
+{
+
+           return 3.7;
+   
+}
+
+else if (marks[i]>=75 && marks[i]<80)
+{
+
+            return 3.3;
+
+}
+
+else if (marks[i]>=70 && marks[i]<75)
+{
+
+            return 3.0;
+
+}
+
+else if (marks[i]>=65 && marks[i]<70)
+{
+
+            return 2.7;
+
+}
+
+else if (marks[i]>=61 && marks[i]<65)
+{
+
+            return 3.3;
+
+}
+
+else if (marks[i]>=58 && marks[i]<61)
+{
+
+            return 2.0;
+
+}
+
+else if (marks[i]>=50 && marks[i]<58)
+{
+
+            return 1.0;
+
+}
+
+else if(marks[i]<50)
+{
+
+            return 0.7;
+
+}
+
+}
+
+}
+
+        
+void calsgpa()
+										{
+						
+											
+											 ofstream data;
+            data.open( "GPA and SGPA" , ios::app);
+   
+      
+									 for(i=0;i<n;i++)
+										{
+          	
+											cout<<"\nEnter the credit hours of " <<subname[i] << " :";
+           cin>>credit[i];
+           data<<"\nCredit hours : "<<credit[i];
+           
+           totalcredit=totalcredit+credit[i];
+           subg[i]=gpa[i]*credit[i];
+           
+           total=total + subg[i];
+           final=total/totalcredit; 
+											
+        
+          }
+										     
+										      
+										  cout<<"\nTotal combined credit hours : "<<totalcredit;
+										  data<<"\nTotal combined credit hours : "<<totalcredit;
+										  
+											 cout<<"\n\n\t\t\t*****************\n";
+            cout<<"\t\t\t| SGPA : "<<final<<"    |"<<endl;
+            cout<<"\t\t\t*****************\n";
+   
+											 data<<"\n\nSGPA : "<<final;
+											 
+											 data.close();
+											 
+									}
+										
+
+friend class Grade;				
+						
+};
+
+class CGPA : public GPA
+	{
+	
+	 public:
+       	
+	      float semester_total;
+	      float cgpa;
+	      float semester_gpa[7];
+	    		int no,i,j;
+	  		  		
+	  		  		
+ CGPA()
+	{
+ 	semester_total=0;
+	}
+	
+	~CGPA()
+	{
+		
+	}
+	
+	void Calculations()
+ {
+	 
+	 	        cout<<"\n\t\t\t****************\n";
+								   cout<<"\t\t\t| CALCULATIONS |\n";
+								   cout<<"\t\t\t****************\n";
+
+
+	     ofstream f2("CGPA");  
+       
+      cout<<"\n\nHow many semester results do you want input? :  ";
+      cin>>no;
+      f2<<"\nN0. Of Semesters : "<<no;
+     
+
+   for(i=0;i<no;i++)
+      {
+   	
+      cout<<"\nEnter Semester "<<i+1<<"GPA : ";
+      cin>>semester_gpa[i];
+      
+      f2<<"\nGPA of semester "<<i+1<<" : "<<semester_gpa[i];
+      cout<<"\n"<<endl;
+   
+      }
+
+   
+   for(int j=0;j<no;j++)
+     {
+   	
+       semester_total=semester_total+semester_gpa[j];
+       
+     }
+   
+   cgpa=semester_total/no;
+   
+   cout<<"\t\t\t*************\n";
+   cout<<"\t\t\t| CGPA : "<<cgpa<<"  |"<<endl;
+   cout<<"\t\t\t*************\n";
+   
+   f2<<"\n\nCGPA : "<<cgpa;
+   
+			f2.close(); 
+			
+}
+
+
+};
+	
+void Add_Animation();
+	
+
+int main()
+	{
+		
+		  cout<<"\n\n\n";
+		  system("color 2");
+		 Add_Animation();
+		  
+		    
+  string n,fn,ad,d;
+  
+		int ag,rn,choice; 
+		
+   while(1)
+    {
+    	
+ 	   x:       // label
+ 	   
+					cout<<"\n\n";   	
+     cout<<"\n\t\t1. Enter Student's Data\n";
+			  cout<<"\t\t2. Calculate GPA & SGPA\n\t\t3. Calculate CGPA";
+			  cout<<"\n\t\t4. View Stored Data\n";
+					cout<<"\t\t5. View Stored GPA & SGPA\n\t\t6. View Stored CGPA\n\t\t7. Exit\n";
+					cout<<"\n\n\t\t~Enter Your Choice here : ";
+					cin>>choice;
+
+     
+ 
+    if(choice==1)
+  {
+  	
+  	        cout<<"\n\n";
+  	        cout<<"\n\t\t\t*********************\n";
+								   cout<<"\t\t\t| STUDENT's DETAILS |\n";
+								   cout<<"\t\t\t*********************\n";
+
+  cout<<"\nEnter name : ";
+  getchar();
+		getline(cin,n);
+		cout<<"\nEnter fathers name : ";
+		getline(cin,fn);
+		cout<<"\nEnter Roll number : ";
+		cin>>rn;
+		cout<<"\nEnter Date of Birth : ";
+		cin>>d;
+ 	cout<<"\nEnter Age : ";
+		cin>>ag;
+		cout<<"\nEnter your city : ";
+		cin>>ad;
+		
+		//string d,string ad,int ag
+		student obj;
+		obj.setname(n);
+		obj.setfname(fn);
+		obj.setrollno(rn);
+		obj.setdob(d);
+		obj.setage(ag);
+		obj.setcity(ad);
+		obj.details();
+		obj.fil();
+		
+}
+
+if(choice==2)
+{
+	
+	GPA *ptr,obj;
+	
+	ptr=&obj;
+	ptr->Calculations();
+	ptr->calsgpa();
+	
+}
+
+
+
+if(choice==3)
+
+{
+	
+	CGPA obj2, *pt;
+	
+	pt=&obj2;
+	
+	pt->Calculations();
+	
+	
+}
+
+if(choice==4)
+{
+          
+											cout<<"\n\n";
+	          cout<<"\n\t\t\t*********************\n";
+								   cout<<"\t\t\t| STUDENT's DETAILS |\n";
+								   cout<<"\t\t\t*********************\n";
+
+	char c;
+	
+	  ifstream file("STUDENT DETAILS");
+     
+    while(file)
+      {
+      								
+      file.get(c);
+      cout<<c;
+      
+					 }
+}
+
+if(choice == 5 )
+{
+           cout<<"\n\n";
+	          cout<<"\n\t\t\t*********************\n";
+								   cout<<"\t\t\t|    GPA and SGPA    |\n";
+								   cout<<"\t\t\t*********************\n";
+
+	char c;
+	
+	ifstream data("GPA and SGPA");
+	
+	while(data)
+	{
+		
+		char c;
+		data.get(c);
+		cout<<c;
+		
+	}
+}
+	
+	if(choice==6)
+	    
+	{
+		       cout<<"\n\n";
+		       cout<<"\n\t\t\t*********************\n";
+								   cout<<"\t\t\t|      CGPA         |\n";
+								   cout<<"\t\t\t*********************\n";
+
+		ifstream f2("CGPA");
+		
+		while(f2)
+		{
+			char c;
+			f2.get(c);
+			cout<<c;
+			
+		}
+	}
+	if(choice==7)
+
+{
+	
+	break;
+	
+}
+
+
+
+if(choice!=1 && choice!=2 && choice !=3 && choice !=4 && choice !=5 && choice !=6 && choice !=7 )
+{
+	
+	cout<<"\nError!! Enter correct option !! \n\n";
+	
+ goto x;
+	
+}
+  }
+
+
+}
+
+void Add_Animation()
+{
+	int k=14;
+	int l=34;
+	int n=14;
+	int d=34;
+	
+	system("Color 5");
+	
+	for(int i=1; i<=60; i++)
+	{
+		cout << "\e[?25l";
+		Sleep(50);
+		gotoxy(l,13);
+		cout << "*",
+		gotoxy(l,14);
+		cout << "-";
+		l++;
+	}
+	
+	for(int m=1; m<12; m++)
+	{
+		cout << "\e[?25l";
+		Sleep(50);
+		gotoxy(33,k);
+		cout << "|";
+		gotoxy(32,k);
+		cout << "*",
+		k++;
+	}
+		
+	for(int m=1; m<12; m++)
+	{
+		cout << "\e[?25l";
+		Sleep(50);
+		gotoxy(94,n);
+		cout << "|";
+		gotoxy(95,n);
+		cout << "*",
+		n++;
+	}
+	
+	for(int p=1; p<=60; p++)
+	{
+		
+		cout << "\e[?25l";
+		Sleep(50);
+		gotoxy(d,24);
+		cout << "-";
+		gotoxy(d,25);
+		cout << "*",
+		d++;
+		
+	}
+	
+		system("Color 2");
+		
+	Sleep(1000);
+	gotoxy(47,19);
+
+	cout << " GPA,SGPA and CGPA Calculator\n\n\n\n";
+	
+	Sleep(500);
+	gotoxy(100,30);
+	cout << "P";
+	
+	Sleep(500);
+	gotoxy(101,30);
+	cout << "R";
+	
+	Sleep(500);
+	gotoxy(102,30);
+	cout << "E";
+	
+	Sleep(500);
+	gotoxy(103,30);
+	cout << "S";
+	
+	Sleep(500);
+	gotoxy(104,30);
+	cout << "E";
+	
+	Sleep(500);
+	gotoxy(105,30);
+	cout << "N";
+	
+	Sleep(500);
+	gotoxy(106,30);
+	cout << "T";
+	
+	Sleep(500);
+	gotoxy(107,30);
+	cout << "O";
+	
+	Sleep(500);
+	gotoxy(108,30);
+	cout << "R";
+	
+	Sleep(500);
+	gotoxy(109,30);
+	cout << "S";
+	
+	Sleep(500);
+	gotoxy(111,30);
+	cout << ": ";
+	
+	Sleep(500);
+	gotoxy(104,32);
+	cout << "A";
+	
+	Sleep(500);
+	gotoxy(105,32);
+	cout << "M";
+	
+	Sleep(500);
+	gotoxy(106,32);
+	cout << "N";
+	
+	Sleep(500);
+	gotoxy(107,32);
+	cout << "A";
+	
+	Sleep(500);
+	gotoxy(109,32);
+	cout << "M";
+	
+	Sleep(500);
+	gotoxy(110,32);
+	cout << "U";
+	
+	Sleep(500);
+	gotoxy(111,32);
+	cout << "B";
+	
+	Sleep(500);
+	gotoxy(112,32);
+	cout << "A";
+	
+	Sleep(500);
+	gotoxy(113,32);
+	cout << "R";
+	
+	Sleep(500);
+	gotoxy(114,32);
+	cout << "A";
+	
+	Sleep(500);
+	gotoxy(115,32);
+	cout << "K";
+	
+	Sleep(500);
+	gotoxy(116,32);
+	cout << " ";
+	
+	Sleep(500);
+	gotoxy(111,34);
+	cout << "&";
+	
+	Sleep(500);
+	gotoxy(105,36);
+	cout << "F";
+	
+	Sleep(500);
+	gotoxy(106,36);
+	cout << "A";
+	
+	Sleep(500);
+	gotoxy(107,36);
+	cout << "T";
+	
+	Sleep(500);
+	gotoxy(108,36);
+	cout << "I";
+	
+	Sleep(500);
+	gotoxy(109,36);
+	cout << "M";
+	
+	Sleep(500);
+	gotoxy(110,36);
+	cout << "A";
+	
+	Sleep(500);
+	gotoxy(113,36);
+	cout << "M";
+	
+	Sleep(500);
+	gotoxy(114,36);
+	cout << "A";
+	
+	Sleep(500);
+	gotoxy(115,36);
+	cout << "L";
+	
+	Sleep(500);
+	gotoxy(116,36);
+	cout << "I";
+	
+	Sleep(500);
+	gotoxy(117,36);
+	cout << "K";
+
+
+}
